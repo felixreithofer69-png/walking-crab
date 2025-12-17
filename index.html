@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>5 Videos parallel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <button id="soundBtn" class="btn" type="button" aria-pressed="false">
+        Ton: AUS
+      </button>
+      <span class="hint">Tippe ggf. einmal, falls dein Browser Autoplay blockiert.</span>
+    </header>
+
+    <section class="wall" aria-label="Video-Wall">
+      <figure class="tile tile--main">
+        <video
+          id="mainVideo"
+          class="vid"
+          src="videos/klick-mich.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+        <figcaption class="label">Hauptvideo</figcaption>
+      </figure>
+
+      <figure class="tile">
+        <video class="vid" src="videos/small-1.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <figcaption class="label">Video 1</figcaption>
+      </figure>
+      <figure class="tile">
+        <video class="vid" src="videos/small-2.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <figcaption class="label">Video 2</figcaption>
+      </figure>
+      <figure class="tile">
+        <video class="vid" src="videos/small-3.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <figcaption class="label">Video 3</figcaption>
+      </figure>
+      <figure class="tile">
+        <video class="vid" src="videos/small-4.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <figcaption class="label">Video 4</figcaption>
+      </figure>
+    </section>
+
+    <div id="tapToStart" class="overlay" hidden>
+      <button id="startBtn" class="btn btn--big" type="button">Starten</button>
+      <p class="overlay__text">Falls Autoplay blockiert wurde: Tippen, um alle Videos zu starten.</p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
