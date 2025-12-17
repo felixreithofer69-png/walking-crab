@@ -30,6 +30,8 @@ body{
   padding: 12px 14px;
   background: var(--panel);
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  z-index: 5;
 }
 
 .hint{
@@ -49,6 +51,7 @@ body{
   font-weight: 600;
 }
 .btn:hover{ border-color: rgba(255,255,255,0.35); }
+.btn:disabled{ opacity: 0.5; cursor: not-allowed; }
 
 .btn--big{
   padding: 14px 18px;
@@ -101,20 +104,24 @@ body{
   backdrop-filter: blur(6px);
 }
 
-.overlay{
+/* Startscreen */
+.startscreen{
   position: fixed;
   inset: 0;
   display: grid;
   place-items: center;
-  gap: 10px;
+  gap: 12px;
   padding: 18px;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
   text-align: center;
+  z-index: 9999;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.overlay__text{
-  max-width: 38ch;
+.startscreen__text{
+  max-width: 46ch;
   color: var(--muted);
   margin: 0;
 }
@@ -143,18 +150,3 @@ body{
     min-height: 240px;
   }
 }
-
-
-/* --- Fix: Overlay muss immer klickbar über iOS/Android-Video-Layern liegen --- */
-.overlay{ z-index: 2147483647; pointer-events: auto; }
-body.needsTap .wall, body.needsTap .topbar{ filter: blur(0); }
-body.needsTap video{ pointer-events: none; } /* verhindert, dass Video-Layer Klicks "schluckt" */
-
-
-/* --- Robust-Fix (Mobile Video-Layer fängt Touch ab):
-   Wenn Autoplay blockiert ist, blenden wir die Videos kurz aus,
-   damit der Overlay-Button garantiert klickbar ist. --- */
-.overlay, .overlay * { pointer-events: auto; touch-action: manipulation; }
-body.needsTap video.vid { display: none !important; }
-
-.overlay{ user-select:none; -webkit-user-select:none; }

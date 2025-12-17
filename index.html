@@ -9,10 +9,10 @@
 <body>
   <main class="page">
     <header class="topbar">
-      <button id="soundBtn" class="btn" type="button" aria-pressed="false">
+      <button id="soundBtn" class="btn" type="button" aria-pressed="false" disabled>
         Ton: AUS
       </button>
-      <span class="hint">Tippe ggf. einmal, falls dein Browser Autoplay blockiert.</span>
+      <span class="hint">Tippe auf „Start“, um alle Videos zu starten (Browser-Regel).</span>
     </header>
 
     <section class="wall" aria-label="Video-Wall">
@@ -21,36 +21,38 @@
           id="mainVideo"
           class="vid"
           src="videos/klick-mich.mp4"
-          autoplay
           muted
           loop
           playsinline
-          preload="auto"
+          preload="metadata"
         ></video>
         <figcaption class="label">Hauptvideo</figcaption>
       </figure>
 
       <figure class="tile">
-        <video class="vid" src="videos/small-1.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="vid" src="videos/small-1.mp4" muted loop playsinline preload="metadata"></video>
         <figcaption class="label">Video 1</figcaption>
       </figure>
       <figure class="tile">
-        <video class="vid" src="videos/small-2.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="vid" src="videos/small-2.mp4" muted loop playsinline preload="metadata"></video>
         <figcaption class="label">Video 2</figcaption>
       </figure>
       <figure class="tile">
-        <video class="vid" src="videos/small-3.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="vid" src="videos/small-3.mp4" muted loop playsinline preload="metadata"></video>
         <figcaption class="label">Video 3</figcaption>
       </figure>
       <figure class="tile">
-        <video class="vid" src="videos/small-4.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="vid" src="videos/small-4.mp4" muted loop playsinline preload="metadata"></video>
         <figcaption class="label">Video 4</figcaption>
       </figure>
     </section>
 
-    <div id="tapToStart" class="overlay" hidden onclick="handleUserStart()">
-      <button id="startBtn" class="btn btn--big" type="button" onclick="handleUserStart()">Starten</button>
-      <p class="overlay__text">Falls Autoplay blockiert wurde: Tippen, um alle Videos zu starten.</p>
+    <!-- Start-Screen: erst nach User-Klick werden alle Videos gestartet -->
+    <div id="startScreen" class="startscreen">
+      <button id="startBtn" class="btn btn--big" type="button">▶ Start</button>
+      <p class="startscreen__text">
+        Einmal tippen/klicken, dann laufen alle Videos parallel in Endlosschleife.
+      </p>
     </div>
   </main>
 
