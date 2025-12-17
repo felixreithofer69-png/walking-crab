@@ -51,9 +51,16 @@ soundBtn.addEventListener("click", async () => {
   await tryPlayAll();
 });
 
-startBtn?.addEventListener("click", async () => {
-  await tryPlayAll();
+async function handleUserStart(){
+  // Videos wieder einblenden, dann abspielen (User-Gesture)
+  document.body.classList.remove('needsTap');
   overlay.hidden = true;
+  await new Promise(requestAnimationFrame);
+  await tryPlayAll();
+}
+
+startBtn?.addEventListener("click", async () => {
+  await handleUserStart();
 });
 
 // Initial state: all muted (inkl. Hauptvideo) - wie gewünscht
@@ -66,5 +73,13 @@ tryPlayAll();
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     tryPlayAll();
+  }
+});
+
+// Tippen irgendwo auf die Fläche startet ebenfalls (hilft auf manchen Geräten)
+overlay?.addEventListener("click", async (e) => {
+  // Nur wenn man nicht direkt auf den Button klickt (der hat eigene Logik)
+  if (e.target === overlay) {
+    await handleUserStart();
   }
 });

@@ -149,3 +149,10 @@ body{
 .overlay{ z-index: 2147483647; pointer-events: auto; }
 body.needsTap .wall, body.needsTap .topbar{ filter: blur(0); }
 body.needsTap video{ pointer-events: none; } /* verhindert, dass Video-Layer Klicks "schluckt" */
+
+
+/* --- Robust-Fix (Mobile Video-Layer fängt Touch ab):
+   Wenn Autoplay blockiert ist, blenden wir die Videos kurz aus,
+   damit der Overlay-Button garantiert klickbar ist. --- */
+.overlay, .overlay * { pointer-events: auto; touch-action: manipulation; }
+body.needsTap video.vid { display: none !important; }
