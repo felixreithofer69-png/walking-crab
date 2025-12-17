@@ -49,14 +49,21 @@ soundBtn.addEventListener("click", async () => {
 
   // Klick ist eine User-Gesture: wir nutzen sie auch, um ggf. Autoplay zu "entsperren"
   await tryPlayAll();
+  // Wenn es trotzdem blockiert bleibt, Button wieder zurücksetzen
+  if (!overlay.hidden && startBtn) startBtn.textContent = 'Starten';
 });
 
 async function handleUserStart(){
+  try{
+    if (startBtn) startBtn.textContent = 'Starte…';
+  } catch(e) {}
   // Videos wieder einblenden, dann abspielen (User-Gesture)
   document.body.classList.remove('needsTap');
   overlay.hidden = true;
   await new Promise(requestAnimationFrame);
   await tryPlayAll();
+  // Wenn es trotzdem blockiert bleibt, Button wieder zurücksetzen
+  if (!overlay.hidden && startBtn) startBtn.textContent = 'Starten';
 }
 
 startBtn?.addEventListener("click", async () => {
@@ -83,3 +90,13 @@ overlay?.addEventListener("click", async (e) => {
     await handleUserStart();
   }
 });
+
+
+window.handleUserStart = handleUserStart;
+
+// Ultimate fallback: jeder Tap/Klick irgendwo startet (capture), damit es wirklich geht.
+window.addEventListener("pointerdown", async () => {
+  if (!overlay.hidden) {
+    await handleUserStart();
+  }
+}, {capture: true});

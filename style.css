@@ -156,3 +156,5 @@ body.needsTap video{ pointer-events: none; } /* verhindert, dass Video-Layer Kli
    damit der Overlay-Button garantiert klickbar ist. --- */
 .overlay, .overlay * { pointer-events: auto; touch-action: manipulation; }
 body.needsTap video.vid { display: none !important; }
+
+.overlay{ user-select:none; -webkit-user-select:none; }
